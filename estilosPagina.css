@@ -34,10 +34,38 @@
     left: 30%;
 }
 
-footer{
-    padding: 30px;
-    position: relative;
-    text-align: left;
-    font-size: 12px;
-    margin-top: 100%;
-  }
+.configurarVS{
+    position: absolute;
+    top: 1550px;
+    left: 100px;
+}
+
+.probeta{
+    position: absolute;
+    left: 30%;
+}
+
+.paso2{
+    position: absolute;
+    top: 440px;
+}
+
+.paso3{
+    position: absolute;
+    top: 770px;
+}
+
+.habilitar{
+    position: absolute;
+    left: 30%;
+}
+
+.fotos{
+    position: absolute;
+    top: 1260px;
+}
+
+.espacio{
+    position: absolute;
+    top: 2200px;
+}
