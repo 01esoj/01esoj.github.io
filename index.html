@@ -16,7 +16,7 @@
     <body>
         <header style="background: #333">
             <div class="container">
-                <a style="color: #ddd">VSCode JUnit5</a>
+                <a style="color: #ddd">VSCode JUnit5 (Jose y Javier)</a>
             </div>
         </header>
         <main>
@@ -76,17 +76,66 @@
                             <img class="habilitar" src="imagenes/ejercicio1.PNG" width="700px">
                         </span>
                     </div>
-                    <div class="fotos">
-                        <span><h3>Imágenes de las clases</h3></span>
-                        <span>
-                            <img src="imagenes/ejMain.PNG" width="700px">
-                            <div><br></div>
-                            <img src="imagenes/ejCoche.PNG" width="700px">
-                            <div><br></div>
-                            <img src="imagenes/ejTest.PNG" width="700px">
-                        </span>
+                    <div class="archivosFuente">
+                        <br>
+                        <a href="https://github.com/01esoj/01esoj.github.io"><h3>Enlace a archivos fuente en GitHub (clickar encima)</h3></a>
                     </div>
-                    <div class="espacio"><br></div>
+                    <div class="fotos">
+                        <br>
+                        <span><h3>Código de las clases</h3></span>
+                        <pre>package pruebaJunit;
+                            public class Coche {
+                                public String modelo;
+                                public float precioBase;
+                                public static float impuesto; //porcentaje entre 0 y 100 y ESTÁTICO pq es común para todas las instancias
+                            
+                                //constructor
+                                public Coche(String modelo, float precioBase) {
+                                    this.modelo = modelo;
+                                    this.precioBase = precioBase;
+                                }
+                            
+                                //MÉTODO que es precísamente el que queremos probar    
+                                
+                                public float precioFinal(float descuento) throws Exception {//1-Devuelve un float que es el precio final del coche.
+                                    float precioConDescuento = this.precioBase;//INICIALMENTE EL PRECIO ES PRECIO BASE QUE TENGA
+                                    if (descuento < 0 || descuento > 100)//PORCENTAJE QUE SE LE APLICA AL PRECIO FINAL
+                                        throw new RuntimeException("Descuento erróneo");
+                                    if (precioBase >= 5000) {//SI EL PRECIO ES MAYOR O IGUAL DE 5000 SE LE HACE EL DESCUENTO
+                                        precioConDescuento = this.precioBase - (this.precioBase * descuento / 100f);
+                                    }
+                                    return precioConDescuento + precioConDescuento * this.impuesto / 100f;
+                                }
+                            }
+                        </pre>
+                        <pre>package pruebaJunit;
+                            import static org.junit.Assert.assertEquals;
+                            import org.junit.Test;
+                            
+                            public class TestCoche {
+                                @Test
+                                public void testPrecioFinal() throws Exception {
+                                    
+                                    System.out.println("precioFinal");
+                                    float descuento = 10.0f;
+                                    Coche instance = new Coche("Audi A3", 10000);
+                                    Coche.impuesto = 20f;
+                                    float expResult = 10800;// si cambiamos el precio da error
+                                    float result = instance.precioFinal(descuento);
+                                    assertEquals(expResult, result, 0.000001);// delta=diferencia máx. permitida
+                                }
+                            }
+                        </pre>
+                        <pre>package pruebaJunit;
+                            public class CocheTest {
+                                public static void main(String[] args) throws Exception{//como esto podía lanzar excepción, se la hemos puesto
+                                    Coche p = new Coche("Audi A3",10000);
+                                    Coche.impuesto=20f;
+                                    System.out.println("Precio final: " + p.precioFinal(10f));//llamamos al precio final con un dscto del 10%   
+                                }
+                            }
+                        </pre>
+                    </div>
                 </div>
             </section>
         </main>
